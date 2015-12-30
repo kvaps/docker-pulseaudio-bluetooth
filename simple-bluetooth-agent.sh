@@ -1,16 +1,23 @@
 #!/bin/bash
 
 PIN="123321"
+NAME="Some-bluetooth"
 
 hciconfig hci0 reset
+hciconfig hci0 name $NAME
 hciconfig hci0 sspmode 0
 
 expect -c '
     spawn bluetoothctl
+    send "power on\r"
+    expect "ower"
+    send "discoverable on\r"
+    expect "iscoverable"
     send "agent on\r"
-    expect "Agent registered"
+    expect "Agent *registered"
+    send "pairable on\r"
+    expect "airable"
     send "default-agent\r"
-    set timeout -1
     while {1} \
     {
        expect \
