@@ -2,6 +2,7 @@
 
 PIN="123321"
 
+hciconfig hci0 reset
 hciconfig hci0 sspmode 0
 
 expect -c '
@@ -20,3 +21,4 @@ expect -c '
        }
     }
     '
+
