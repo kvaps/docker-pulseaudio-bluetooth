@@ -1,4 +1,4 @@
 #!/bin/bash
 dbus-daemon --system --fork
-/usr/libexec/bluetooth/bluetoothd &
+/usr/lib/bluetooth/bluetoothd &
 /bin/simple-bluetooth-agent.sh
