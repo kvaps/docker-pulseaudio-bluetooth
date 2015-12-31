@@ -4,15 +4,13 @@ PIN="123321"
 NAME="Some-bluetooth"
 
 hciconfig hci0 reset
+hciconfig hci0 up
 hciconfig hci0 name $NAME
 hciconfig hci0 sspmode 0
+hciconfig hci0 piscan
 
 expect -c '
     spawn bluetoothctl
-    send "power on\r"
-    expect "ower"
-    send "discoverable on\r"
-    expect "iscoverable"
     send "agent on\r"
     expect "Agent *registered"
     send "pairable on\r"
