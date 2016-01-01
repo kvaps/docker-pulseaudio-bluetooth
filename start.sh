@@ -1,5 +1,5 @@
 #!/bin/bash
 dbus-daemon --system --fork
-su pulse -c 'pulseaudio --log-level=4 -D'
-/usr/lib/bluetooth/bluetoothd --plugin=a2dp &
+pulseaudio --log-level=1 &
+/usr/lib/bluetooth/bluetoothd --plugin=a2dp -n &
 . /bin/simple-bluetooth-agent.sh
