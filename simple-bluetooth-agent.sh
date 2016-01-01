@@ -8,10 +8,9 @@ hciconfig hci0 piscan
 
 expect -c '
     spawn bluetoothctl
-    send "agent on\r"
-    expect "Agent *registered"
     send "pairable on\r"
-    expect "airable"
+    send "agent on\r"
+    expect "Agent registered"
     send "default-agent\r"
     expect "Default agent request successful"
     set timeout 3
@@ -35,7 +34,7 @@ expect -c '
        expect \
        {
            "Enter PIN code:"         { send "'"$PIN"'\r" }  
-           "Authorize service * (yes/no)"       { send "yes\r" }
+           "ice * (yes/no)"       { send "yes\r" }
            eof {puts "\rBreaking - EOF\r" ; break}
        }
     }
