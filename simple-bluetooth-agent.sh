@@ -1,10 +1,5 @@
 #!/bin/bash
 
-PIN="123321"
-NAME="Some-bluetooth"
-DEVICE="40:EF:4C:C3:9C:CE"
-DEVICE_PIN="0000"
-
 hciconfig hci0 reset
 hciconfig hci0 up
 hciconfig hci0 name $NAME
