@@ -2,6 +2,8 @@
 
 PIN="123321"
 NAME="Some-bluetooth"
+DEVICE="40:EF:4C:C3:9C:CE"
+DEVICE_PIN="0000"
 
 hciconfig hci0 reset
 hciconfig hci0 up
@@ -16,6 +18,23 @@ expect -c '
     send "pairable on\r"
     expect "airable"
     send "default-agent\r"
+    expect "Default agent request successful"
+    set timeout 3
+    set paired False
+    send "paired-devices\r"
+    expect "'$DEVICE'" { set paired True }
+    set timeout -1
+
+    if { $paired == False } {
+         send "scan on\r"
+         expect "Device *'$DEVICE'"
+         send "scan off\r"
+         send "pair '$DEVICE'\r"
+         expect "Enter PIN code:"         { send "'"$DEVICE_PIN"'\r" }
+         expect "\[bluetooth\]*#"
+         send "connect '$DEVICE'\r"
+    }
+
     while {1} \
     {
        expect \
